@@ -7,12 +7,12 @@
         <MiscTab
             v-if="taskbar"
             :buttons="form_buttons_tab"
-            @Command-0="setView"
-            @Command-1="setView"
+            @action="setView"
+            @exit="$router.push({ path: '/configuration' })"
         />
         <div class="flex bg-color-brand-four flex-column w-full h-full">
-            <MiscControl/>
-            <RouterView />
+            <!-- <MiscControl/> -->
+            <RouterView/> 
         </div>
     </div>
 
@@ -33,15 +33,33 @@ export default {
                 {
                     name: "Board",
                     size: [21,21],
-                    icon: "board-icon",
-                    response: "/"
+                    icon: "dashboard-icon",
+                    response: "/home"
                 },
                 {
                     name: "Notes",
-                    size: [19,19],
-                    icon: "notes-icon",
+                    size: [20,20],
+                    icon: "schedule-icon",
                     response: "/notes"
-                }
+                },
+                {
+                    name: "Hangar",
+                    size: [20,20],
+                    icon: "space-ship-icon",
+                    response: "/hangar"
+                },
+                {
+                    name: "Stations",
+                    size: [20,20],
+                    icon: "place-icon",
+                    response: "/stations"
+                },
+                {
+                    name: "System",
+                    size: [20,20],
+                    icon: "location-icon",
+                    response: "/system"
+                },
             ]
         }
     },

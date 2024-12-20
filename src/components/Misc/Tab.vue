@@ -17,7 +17,7 @@
             <ButtonBasic
                 v-for="(item, index) of buttons"
                 class="bg-color-brand-four aspect-ratio flex x-center y-center rounded-md pointer"
-                @click="$emit(`Command-${index}`, item?.response)"
+                @click="$emit(`action`, item?.response)"
                 :key="index"
             >
                 <Icon
@@ -33,7 +33,7 @@
 
             <ButtonBasic
                 class="bg-color-brand-four aspect-ratio flex x-center y-center rounded-md pointer"
-                @click="toggleThemeMode()"
+                @click="toggleThemeMode(), $emit('theme', true)"
             >
                 <Icon
                     icon="light-icon"
@@ -44,6 +44,7 @@
             
             <ButtonBasic
                 class="bg-color-brand-four aspect-ratio flex x-center y-center rounded-md pointer"
+                @click="$emit('configuration', true)"
             >
                 <Icon
                     icon="config-icon"
@@ -54,6 +55,7 @@
 
             <ButtonBasic
                 class="bg-color-brand-four aspect-ratio flex x-center y-center rounded-md pointer"
+                @click="$emit('exit', true)"
             >
                 <Icon
                     icon="exit-icon"

@@ -1,19 +1,23 @@
 :root {
 
-  --color-brand-one: #ffffff;
-  --color-brand-two: #111111;
-  --color-brand-three: #f37d2f;
-  --color-brand-four: #f7f7f7;
-  --color-brand-five: #e0e0e0;
+  --color-brand-one: rgb(255, 255, 255);
+  --color-brand-two: rgb(38, 38, 38);
+  --color-brand-three: rgb(255, 87, 34);
+  --color-brand-four: rgb(247, 247, 247);
+  --color-brand-five: rgb(224, 224, 224);
+
+  --color-brand-star: rgb(241, 99, 63);
 
 }
 
 .dark {
-  --color-brand-one: #141414;
-  --color-brand-two: #ffffff;
-  --color-brand-three: #FF5722;
-  --color-brand-four: #252525;
-  --color-brand-five: #1a1a1a;
+  --color-brand-one: rgb(20, 20, 20);
+  --color-brand-two: rgb(255, 255, 255);
+  --color-brand-three: rgb(255, 87, 34);
+  --color-brand-four: rgb(26, 26, 26);
+  --color-brand-five: rgb(23, 23, 23);
+
+  --color-brand-star: rgb(211, 211, 211);
 }
 
 .bg-none {
@@ -38,6 +42,10 @@
 
 .bg-color-brand-five {
   background-color: var(--color-brand-five);
+}
+
+.bg-color-brand-star {
+  background-color: var(--color-brand-star);
 }
 
 .color-brand-one{

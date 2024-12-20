@@ -5,10 +5,12 @@
     >
         <input 
             :type="type"
+            :class="inputClass"
             :value="value"
             :placeholder="placeholder"
             @input="(data) => { $emit('update:modelValue', data.target.value); }"
         >
+        <slot/>
     </div>
 </template>
 
@@ -22,6 +24,10 @@ export default{
     },
     props:{
         class: {
+            type: String,
+            default: ""
+        },
+        inputClass: {
             type: String,
             default: ""
         },

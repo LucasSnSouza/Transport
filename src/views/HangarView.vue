@@ -1,9 +1,9 @@
 <template>
-
-    <div class="home-view-wrapper w-full h-full p-xlg">
+    
+    <div class="hangar-view-wrapper w-full h-full p-xlg">
 
     </div>
-    
+
 </template>
 
 <script>
