@@ -16,7 +16,7 @@ const router = createRouter({
       path: '/fundation',
       name: 'Fundation',
       component: FundationView,
-      meta: { title: 'Fundação' }
+      meta: { title: 'Fundation' }
     },
   ]
 })

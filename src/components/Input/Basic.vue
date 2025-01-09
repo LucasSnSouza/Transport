@@ -6,6 +6,7 @@
         <input 
             :type="type"
             :class="inputClass"
+            :disabled="disabled"
             :value="value"
             :placeholder="placeholder"
             @input="(data) => { $emit('update:modelValue', data.target.value); }"
@@ -34,6 +35,10 @@ export default{
         placeholder: {
             type: String,
             default: ""
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         },
         length: {
             type: Number,
@@ -66,6 +71,10 @@ export default{
         border: none;
         background: none;
         outline: none;
+    }
+
+    input:disabled{
+        background: rgba(206, 206, 206, 0.2);
     }
 
 }
