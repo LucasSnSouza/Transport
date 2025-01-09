@@ -2,16 +2,16 @@
 
     <div class="fundation-view-wrapper w-full h-full p-xlg flex flex-column gap-xlg">
 
-        <div class="flex gap-xlg justify-between">
+        <div class="superior flex gap-xlg justify-between">
 
             <div class="w-full">
-                <h1 class="font-sm color-brand-three">proprietary</h1>
-                <p class="font-sm">{{ owner }}</p>
+                <h1 class="font-sm">proprietary</h1>
+                <p class="font-sm color-brand-three">{{ owner }}</p>
             </div>
 
             <div class="w-full">
-                <h1 class="font-sm color-brand-three">funds</h1>
-                <p class="font-sm">{{ companyFounds - form['funds'] }}</p>
+                <h1 class="font-sm">funds</h1>
+                <p class="font-sm color-brand-three">{{ companyFounds - form['funds'] }}</p>
             </div>
 
         </div>
@@ -168,6 +168,15 @@ export default{
 
 </script>
 
-<style>
+<style lang="scss">
+
+.superior{
+
+    div:not(:first-child){
+        border-left: 1px solid var(--color-brand-five);
+        padding-left: 12px;
+    }
+
+}
 
 </style>
