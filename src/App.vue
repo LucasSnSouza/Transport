@@ -2,7 +2,7 @@
 
     <div 
         :class="theme"
-        class="app-wrapper flex flex-column h-full"
+        class="app-wrapper flex flex-column h-full bg-color-brand-one"
     >
         <div class="title-app-wrapper w-full flex y-end x-start p-lg color-brand-one bg-color-brand-three">
 
