@@ -1,6 +1,6 @@
 <template>
 
-    <div class="fundation-view-wrapper w-full h-full p-xlg flex flex-column gap-xlg">
+    <div class="fundation-view-wrapper w-full h-full p-xlg flex flex-column gap-xlg bg-color-brand-one">
 
         <div class="superior flex gap-xlg justify-between">
 

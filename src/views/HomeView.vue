@@ -1,6 +1,6 @@
 <template>
 
-    <div class="home-view-wrapper w-full h-full p-xlg">
+    <div class="home-view-wrapper w-full h-full p-xlg bg-color-brand-one">
 
         <button @click="$router.push({ path: '/fundation' })">Fundation</button>
 
