@@ -2,7 +2,8 @@
 
     <div class="home-view-wrapper w-full h-full p-xlg">
 
-        
+        <button @click="$router.push({ path: '/fundation' })">Fundation</button>
+
     </div>
     
 </template>
