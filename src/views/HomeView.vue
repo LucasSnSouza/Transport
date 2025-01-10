@@ -3,6 +3,7 @@
     <div class="home-view-wrapper w-full h-full p-xlg bg-color-brand-one">
 
         <button @click="$router.push({ path: '/fundation' })">Fundation</button>
+        <button @click="$router.push({ path: '/companies' })">Companies</button>
 
     </div>
     
@@ -11,6 +12,7 @@
 <script>
 
 import { useSystemStore } from '@/stores/system.js'
+import { useManagerStore } from '@/stores/manager.js'
 
 import * as Button from "@/components/Button"
 import * as Input from "@/components/Input"
@@ -27,6 +29,8 @@ export default{
         ...Input,
         ...Misc,
     },
+    methods:{
+    },  
     created(){
         useSystemStore().setTaskbar(true);
     }

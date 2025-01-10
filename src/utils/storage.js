@@ -14,3 +14,19 @@ export function getValueRootStorage(key, default_value = null){
         return default_value;
     }
 }
+
+export function changeBusinessBalance(value){
+    let storage = JSON.parse(window.localStorage.getItem("app-business"));
+    storage.balance - Number(value);
+    console.log(storage.balance)
+    window.localStorage.setItem("app-business", JSON.stringify(storage));
+}  
+
+export function createCompanie(form){
+    if(window.localStorage.getItem("app-companies")){
+        let storage = JSON.parse(window.localStorage.getItem("app-companies"));
+        storage.push(form);
+        window.localStorage.setItem("app-companies", JSON.stringify(storage));
+        changeBusinessBalance('balance', form.balance)
+    }
+}

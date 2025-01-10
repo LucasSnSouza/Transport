@@ -6,12 +6,12 @@
 
             <div class="w-full">
                 <h1 class="font-sm">proprietary</h1>
-                <p class="font-sm color-brand-three">{{ owner }}</p>
+                <p class="font-sm color-brand-three">{{ business.owner }}</p>
             </div>
 
             <div class="w-full">
                 <h1 class="font-sm">bank</h1>
-                <p class="font-sm color-brand-three">{{ companyFounds - form['funds'] }}</p>
+                <p class="font-sm color-brand-three">{{ business.balance - form['balance'] }}</p>
             </div>
 
         </div>
@@ -33,16 +33,33 @@
                     />
     
                     <InputBasic
-                        v-model="form['funds']"
+                        v-model="form['balance']"
                         class="ghost rounded-sm color-brand-five flex"
                         input-class="p-lg font-sm color-brand-two"
                         type="number"
-                        placeholder="Funds"
-                        :value="form['funds']"
+                        placeholder="Balance"
+                        :value="form['balance']"
                     >
                     </InputBasic>
     
                 </div>
+
+                <InputSelect
+                    :items="types"
+                    :value="form['type']"
+                    reference="label"
+                    class="font-sm ghost rounded-sm color-brand-five p-lg"
+                    input-options-class="p-lg flex flex-column gap-md font-sm ghost rounded-sm color-brand-five bg-color-brand-one shadow-sm"
+                    placeholder="Type"
+                    #default="{ item }"
+                >
+                    <ButtonBasic
+                        class="p-sm bg-none flex x-start"
+                        @click="form['type'] = item"
+                    >
+                        <p>{{ item?.label }}</p>
+                    </ButtonBasic>
+                </InputSelect>
     
                 <div class="flex gap-lg">
     
@@ -78,12 +95,12 @@
                 <div class="flex gap-lg">
     
                     <InputBasic
-                        v-model="form['neighborhood']"
+                        v-model="form['district']"
                         :disabled="true"
                         class="ghost rounded-sm color-brand-five flex"
                         input-class="p-lg font-sm color-brand-two"
-                        placeholder="Neighborhood"
-                        :value="form['neighborhood']"
+                        placeholder="District"
+                        :value="form['district']"
                     />
                     
                     <InputBasic
@@ -101,7 +118,7 @@
                     v-model="form['description']"
                     class="ghost rounded-sm color-brand-five"
                     input-class="p-lg font-sm color-brand-two"
-                    placeholder="Description"
+                    placeholder="Company description"
                     :value="form['description']"
                 />
     
@@ -110,7 +127,7 @@
             <div>
                 <ButtonBasic
                     class="bg-color-brand-two color-brand-one p-lg rounded-sm w-half"
-                    @click="created = true"
+                    @click="createCompanie(), created = true"
                 >
                     <p>Submit</p>
                 </ButtonBasic>
@@ -122,20 +139,50 @@
             class="flex flex-column y-center gap-xlg"
         >
 
-            <div>
-                <h1 class="font-md text-center">Congratulations</h1>
-                <p class="font-sm o-half text-center">Your business created of success and now, you can manager your dreams.</p>
+            <div
+                v-if="!error" 
+                class="flex flex-column y-center gap-xlg"
+            >
+                <div>
+                    <h1 class="font-md text-center">Congratulations</h1>
+                    <p class="font-sm o-half text-center">Your business created of success and now, you can manager your dreams.</p>
+                </div>
+    
+                <ButtonBasic
+                    class="bg-color-brand-two color-brand-one p-lg rounded-sm w-half"
+                    @click="$router.push({ path: '/' })"
+                >
+                    <p>Go Home</p>
+                </ButtonBasic>
             </div>
 
-            <ButtonBasic
-                class="bg-color-brand-two color-brand-one p-lg rounded-sm w-half"
-                @click="$router.push({ path: '/' })"
+            <div
+                v-else 
+                class="flex flex-column y-center gap-xlg"
             >
-                <p>Go Home</p>
-            </ButtonBasic>
+                <div>
+                    <h1 class="font-md text-center">Ah, sorry</h1>
+                    <p class="font-sm o-half text-center">It seems that some information was not entered correctly. Could you please complete the form entirely?</p>
+                </div>
+
+                <div class="flex flex-column gap-md w-half">
+                    <ButtonBasic
+                        class="bg-color-brand-two color-brand-one p-lg rounded-sm w-full"
+                        @click="error = false, created = false"
+                    >
+                        <p>Try again</p>
+                    </ButtonBasic>
+                    <ButtonBasic
+                        class="bg-color-brand-two color-brand-one p-lg rounded-sm w-full"
+                        @click="$router.push({ path: '/' })"
+                    >
+                        <p>Go Home</p>
+                    </ButtonBasic>
+                </div>
+
+            </div>
 
         </div>
-
     </div>
     
 </template>
@@ -143,6 +190,12 @@
 <script>
 
 import { useSystemStore } from '@/stores/system.js'
+import { useManagerStore } from '@/stores/manager.js'
+
+import { validateObject } from '@/utils/validate.js'
+import { createCompanie } from '@/utils/storage.js'
+
+import { types } from '@/defaults/defaultsTypes.js'
 
 import * as Button from "@/components/Button"
 import * as Input from "@/components/Input"
@@ -152,9 +205,14 @@ export default{
     data(){
         return{
             form: {
-                funds: 0
+                balance: 0,
+                owner: useManagerStore().getBusiness.owner,
+                createdAt: new Date().toLocaleDateString('pt-BR')
             },
+            business: useManagerStore().getBusiness,
+            companies: useManagerStore().getCompanies,
             created: false,
+            error: false,
         }
     },
     watch: {
@@ -166,10 +224,10 @@ export default{
                         this.form = {
                             ...this.form,
                             state: data?.state,
-                            neighborhood: data?.district,
+                            district: data?.district,
                             street: data?.address,
                             city: data?.city,
-                            coordenates: {
+                            geolocation: {
                                 latitude: data?.lat,
                                 longitude: data?.lng
                             },
@@ -186,15 +244,21 @@ export default{
         ...Misc,
     },
     computed:{
-        companyFounds(){
-            return 3000
-        },
-        owner(){
-            return "Lucas dos Santos Souza"
+        types(){
+            return types;
+        }
+    },
+    methods: {
+        createCompanie(){
+            if(validateObject(this.form, ['balance', 'name', 'cep'])){
+                useManagerStore().setCompanie(this.form);
+            }else{
+                this.error = true
+            }
         }
     },
     created(){
-        useSystemStore().setTaskbar(true);
+
     }
 }
 
