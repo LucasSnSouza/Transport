@@ -11,7 +11,7 @@
 
             <div class="w-full">
                 <h1 class="font-sm">bank</h1>
-                <p class="font-sm color-brand-three">{{ business.balance - form['balance'] }}</p>
+                <p class="font-sm color-brand-three">$ {{ business.balance - form['balance'] }}</p>
             </div>
 
         </div>
@@ -206,11 +206,13 @@ export default{
         return{
             form: {
                 balance: 0,
+                uid: Date.now().toString(36) + Math.random().toString(36).substring(2),
                 owner: useManagerStore().getBusiness.owner,
                 createdAt: new Date().toLocaleDateString('pt-BR')
             },
             business: useManagerStore().getBusiness,
             companies: useManagerStore().getCompanies,
+            records: useManagerStore().getRecords,
             created: false,
             error: false,
         }
@@ -251,7 +253,9 @@ export default{
     methods: {
         createCompanie(){
             if(validateObject(this.form, ['balance', 'name', 'cep'])){
-                useManagerStore().setCompanie(this.form);
+                this.business.balance = this.business.balance - Number(this.form.balance);
+                this.companies.push(this.form);
+                this.records.push({ uid: this.form.uid, records: [] })
             }else{
                 this.error = true
             }

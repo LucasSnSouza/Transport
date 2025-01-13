@@ -3,26 +3,24 @@ import { defineStore } from "pinia";
 export const useManagerStore = defineStore('manager', {
     state: () => ({
         business: {},
-        companies: []
+        companies: [],
+        records: []
     }),
     getters: {
         getBusiness: (state) => state.business,
-        getCompanies: (state) => state.companies
+        getCompanies: (state) => state.companies,
+        getRecords: (state) => state.records
     },
     actions: {
-        getStoragedBusiness(){
-            this.business = JSON.parse(window.localStorage.getItem("app-business"))
-        },
-        getStoragedCompanies(){
-            this.companies = JSON.parse(window.localStorage.getItem("app-companies"))
+        registerAllStorages(){
+            this.business = JSON.parse(window.localStorage.getItem("app-business"));
+            this.companies = JSON.parse(window.localStorage.getItem("app-companies"));
+            this.records = JSON.parse(window.localStorage.getItem("app-records"));
         },
         setStoragedAll(){
             window.localStorage.setItem("app-business", JSON.stringify(this.business));
             window.localStorage.setItem("app-companies", JSON.stringify(this.companies));
+            window.localStorage.setItem("app-records", JSON.stringify(this.records));
         },
-        setCompanie(form){
-            this.business.balance = this.business.balance - Number(form.balance);
-            this.companies.push(form);
-        }
     }
 })

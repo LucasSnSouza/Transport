@@ -8,17 +8,18 @@
             </div>
             <div class="w-full">
                 <h1 class="font-sm">balances</h1>
-                <p class="font-sm color-brand-three">{{ balances() }}</p>
+                <p class="font-sm color-brand-three">$ {{ balances() }}</p>
             </div>
             <div class="w-full">
                 <h1 class="font-sm">bank</h1>
-                <p class="font-sm color-brand-three">{{ business.balance }}</p>
+                <p class="font-sm color-brand-three">$ {{ business.balance }}</p>
             </div>
         </div>
         <div class="companies-buttons-frame w-full h-full flex flex-column gap-lg">
             <ButtonBasic
                 v-for="(item, index) of companies"
                 class="w-full bg-color-brand-one rounded-sm shadow-sm ghost color-brand-four p-lg"
+                @click="$router.push({ path: '/company', query: { id: index, uid: item.uid } })"
             >
                 <div class="color-brand-two gap-md flex flex-column">
                     <div class="w-full flex flex-column x-start text-start font-sm">
@@ -73,7 +74,6 @@ export default{
 </script>
 
 <style lang="scss">
-
 
 .superior{
 

@@ -26,7 +26,7 @@ import * as Misc from "@/components/Misc"
 export default {
     data(){
         return{
-            debug: true,
+            debug: false,
         }
     },
     components: {
@@ -59,9 +59,11 @@ export default {
         if(!window.localStorage.getItem("app-companies")){
             window.localStorage.setItem("app-companies", JSON.stringify([]) )
         }
+        if(!window.localStorage.getItem("app-records")){
+            window.localStorage.setItem("app-records", JSON.stringify([]) )
+        }
 
-        useManagerStore().getStoragedBusiness();
-        useManagerStore().getStoragedCompanies();
+        useManagerStore().registerAllStorages();
 
         if(!this.debug){
             window.addEventListener('beforeunload', (event) => {
