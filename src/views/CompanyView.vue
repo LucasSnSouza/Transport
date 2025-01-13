@@ -44,6 +44,7 @@
             <div class="flex gap-md">
                 <ButtonBasic
                     class="flex flex-column gap-sm bg-color-brand-three p-lg w-full rounded-sm color-brand-one"
+                    @click="$router.push({ path: '/operations', query: { id: $route.query.id } })"
                 >
                     <MiscIcon
                         icon="jobs-icon"
@@ -73,7 +74,43 @@
                         :size="[18,18]"
                         color="#FFFFFF"
                     />
-                    <p>Fleet</p>
+                    <p>Garage</p>
+                </ButtonBasic>
+            </div>
+
+            <div class="flex gap-md">
+                <ButtonBasic
+                    class="flex flex-column gap-sm bg-color-brand-three p-lg w-full rounded-sm color-brand-one"
+                >
+                    <MiscIcon
+                        icon="storage-icon"
+                        :size="[22,22]"
+                        color="#FFFFFF"
+                    />
+                    <p>Storage</p>
+                </ButtonBasic>
+            </div>
+
+            <div class="flex gap-md">
+                <ButtonBasic
+                    class="flex flex-column gap-sm bg-color-brand-three p-lg w-full rounded-sm color-brand-one"
+                >
+                    <MiscIcon
+                        icon="place-icon"
+                        :size="[20,20]"
+                        color="#FFFFFF"
+                    />
+                    <p>Places</p>
+                </ButtonBasic>
+                <ButtonBasic
+                    class="flex flex-column gap-sm bg-color-brand-three p-lg w-full rounded-sm color-brand-one"
+                >
+                    <MiscIcon
+                        icon="structure-icon"
+                        :size="[18,18]"
+                        color="#FFFFFF"
+                    />
+                    <p>Structures</p>
                 </ButtonBasic>
             </div>
 

@@ -2,12 +2,25 @@
 
     <div 
         :class="theme"
-        class="app-wrapper flex flex-column h-full bg-color-brand-one"
+        class="app-wrapper flex flex-column y-center h-full bg-color-brand-one"
     >
-        <div class="title-app-wrapper w-full flex y-end x-start p-lg color-brand-one bg-color-brand-three">
-
-            <h1 class="font-lg">{{ title }}</h1>
-
+        <div 
+            class="title-app-wrapper w-full flex y-end x-start p-lg color-brand-one bg-color-brand-three"
+        >
+            <div class="flex gap-md y-end">
+                <ButtonBasic
+                    v-if="$route.meta.goback"
+                    class="rounded-md aspect-ratio p-md bg-color-brand-one flex x-center y-center"
+                    @click="$router.go(-1)"
+                >
+                    <MiscIcon
+                        icon="arrow-icon"
+                        :size="[20,20]"
+                        color="#00000088"
+                    />
+                </ButtonBasic>
+                <h1 class="font-md">{{ title }}</h1>
+            </div>
         </div>
         <RouterView/> 
     </div>
@@ -21,6 +34,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useSystemStore } from '@/stores/system.js'
 import { useManagerStore } from '@/stores/manager.js'
 
+import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
 
 export default {
@@ -30,12 +44,13 @@ export default {
         }
     },
     components: {
+        ...Button,
         ...Misc
     },
     methods: {
         setView(value){
             this.$router.push({ path: value });
-        }
+        },
     },
     computed: {
         title() {
@@ -43,9 +58,6 @@ export default {
         },
         theme() {
             return useSystemStore().getTheme;
-        },
-        taskbar(){
-            return useSystemStore().getTaskbar;
         }
     },
     created(){
@@ -80,6 +92,7 @@ export default {
 
 .title-app-wrapper{
     min-height: 180px;
+    transition: .5s;
 }
 
 </style>
