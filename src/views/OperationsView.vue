@@ -16,11 +16,11 @@
             </div>
             <div class="w-full">
                 <h1 class="font-sm">expected</h1>
-                <p class="font-sm color-brand-three">$ {{ 0 }}</p>
+                <p class="font-sm color-brand-three">$ {{ $money(0) }}</p>
             </div>
             <div class="w-full">
                 <h1 class="font-sm">balance</h1>
-                <p class="font-sm color-brand-three">$ {{ 0 }}</p>
+                <p class="font-sm color-brand-three">$ {{ $money(0) }}</p>
             </div>
         </div>
 

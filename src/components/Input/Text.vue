@@ -54,8 +54,6 @@ export default{
 
 .input-text-basic-wrapper{
 
-    height: 120px;
-
     textarea{
         width: 100%;
         height: 100%;

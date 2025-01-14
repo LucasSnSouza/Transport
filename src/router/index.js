@@ -21,7 +21,7 @@ const router = createRouter({
       path: '/configuration',
       name: 'Configuration',
       component: ConfigurationView,
-      meta: { title: 'Settings', goback: true}
+      meta: { title: 'Configuration', goback: true}
     },
     {
       path: '/foundation',
