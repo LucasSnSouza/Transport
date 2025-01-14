@@ -67,7 +67,6 @@ export default{
         }
     },
     created(){
-        useSystemStore().setTaskbar(true);
     }
 }
 

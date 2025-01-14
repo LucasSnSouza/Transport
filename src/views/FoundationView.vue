@@ -1,16 +1,18 @@
 <template>
 
+    <!-- Tradução completa para: pt, en -->
+    
     <div class="fundation-view-wrapper w-full h-full p-xlg flex flex-column gap-xlg bg-color-brand-one">
 
         <div class="superior flex gap-xlg justify-between">
 
             <div class="w-full">
-                <h1 class="font-sm">proprietary</h1>
+                <h1 class="font-sm">{{ $translate('foundation.infobar.owner') }}</h1>
                 <p class="font-sm color-brand-three">{{ business.owner }}</p>
             </div>
 
             <div class="w-full">
-                <h1 class="font-sm">bank</h1>
+                <h1 class="font-sm">{{ $translate('foundation.infobar.bank') }}</h1>
                 <p class="font-sm color-brand-three">$ {{ business.balance - form['balance'] }}</p>
             </div>
 
@@ -28,7 +30,7 @@
                         v-model="form['name']"
                         class="ghost rounded-sm color-brand-five"
                         input-class="p-lg font-sm color-brand-two"
-                        placeholder="Company Name"
+                        :placeholder="$translate('foundation.placeholders.companyName')"
                         :value="form['name']"
                     />
     
@@ -37,7 +39,7 @@
                         class="ghost rounded-sm color-brand-five flex"
                         input-class="p-lg font-sm color-brand-two"
                         type="number"
-                        placeholder="Balance"
+                        :placeholder="$translate('foundation.placeholders.balance')"
                         :value="form['balance']"
                     >
                     </InputBasic>
@@ -50,7 +52,7 @@
                     reference="label"
                     class="font-sm ghost rounded-sm color-brand-five p-lg"
                     input-options-class="p-lg flex flex-column gap-md font-sm ghost rounded-sm color-brand-five bg-color-brand-one shadow-sm"
-                    placeholder="Type"
+                    :placeholder="$translate('foundation.placeholders.businessType')"
                     #default="{ item }"
                 >
                     <ButtonBasic
@@ -67,7 +69,7 @@
                         v-model="form['cep']"
                         class="ghost rounded-sm color-brand-five"
                         input-class="p-lg font-sm color-brand-two"
-                        placeholder="Company Cep"
+                        :placeholder="$translate('foundation.placeholders.companyPostalCode')"
                         type="number"
                         :value="form['cep']"
                     />
@@ -77,7 +79,7 @@
                         :disabled="true"
                         class="ghost rounded-sm color-brand-five flex"
                         input-class="p-lg font-sm color-brand-two"
-                        placeholder="State"
+                        :placeholder="$translate('foundation.placeholders.state')"
                         :value="form['state']"
                     />
     
@@ -86,7 +88,7 @@
                         :disabled="true"
                         class="ghost rounded-sm color-brand-five flex"
                         input-class="p-lg font-sm color-brand-two"
-                        placeholder="City"
+                        :placeholder="$translate('foundation.placeholders.city')"
                         :value="form['city']"
                     />
     
@@ -99,7 +101,7 @@
                         :disabled="true"
                         class="ghost rounded-sm color-brand-five flex"
                         input-class="p-lg font-sm color-brand-two"
-                        placeholder="District"
+                        :placeholder="$translate('foundation.placeholders.district')"
                         :value="form['district']"
                     />
                     
@@ -108,7 +110,7 @@
                         :disabled="true"
                         class="ghost rounded-sm color-brand-five flex"
                         input-class="p-lg font-sm color-brand-two"
-                        placeholder="Street"
+                        :placeholder="$translate('foundation.placeholders.street')"
                         :value="form['street']"
                     />
     
@@ -118,7 +120,7 @@
                     v-model="form['description']"
                     class="ghost rounded-sm color-brand-five"
                     input-class="p-lg font-sm color-brand-two"
-                    placeholder="Company description"
+                    :placeholder="$translate('foundation.placeholders.companyDescription')"
                     :value="form['description']"
                 />
     
@@ -129,7 +131,7 @@
                     class="bg-color-brand-two color-brand-one p-lg rounded-sm w-half"
                     @click="createCompanie(), created = true"
                 >
-                    <p>Submit</p>
+                    <p>{{ $translate('foundation.placeholders.submit') }}</p>
                 </ButtonBasic>
             </div>
         </div>
@@ -192,8 +194,7 @@
 import { useSystemStore } from '@/stores/system.js'
 import { useManagerStore } from '@/stores/manager.js'
 
-import { validateObject } from '@/utils/validate.js'
-import { createCompanie } from '@/utils/storage.js'
+import Utils from '@/utils/';
 
 import { types } from '@/defaults/defaultsTypes.js'
 
@@ -206,9 +207,10 @@ export default{
         return{
             form: {
                 balance: 0,
-                uid: Date.now().toString(36) + Math.random().toString(36).substring(2),
+                uid: Utils.generator.uid(),
                 owner: useManagerStore().getBusiness.owner,
-                createdAt: new Date().toLocaleDateString('pt-BR')
+                createdAt: new Date().toLocaleDateString('pt-BR'),
+                places: []
             },
             business: useManagerStore().getBusiness,
             companies: useManagerStore().getCompanies,
@@ -252,13 +254,9 @@ export default{
     },
     methods: {
         createCompanie(){
-            if(validateObject(this.form, ['balance', 'name', 'cep'])){
-                this.business.balance = this.business.balance - Number(this.form.balance);
-                this.companies.push(this.form);
-                this.records.push({ uid: this.form.uid, records: [] })
-            }else{
-                this.error = true
-            }
+            this.business.balance = this.business.balance - Number(this.form.balance);
+            this.companies.push(this.form);
+            this.records.push({ uid: this.form.uid, records: [] })
         }
     },
     created(){

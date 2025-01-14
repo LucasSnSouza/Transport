@@ -68,6 +68,7 @@
                 </ButtonBasic>
                 <ButtonBasic
                     class="flex flex-column gap-sm bg-color-brand-three p-lg w-full rounded-sm color-brand-one"
+                    @click="$router.push({ path: '/garage', query: { id: $route.query.id } })"
                 >
                     <MiscIcon
                         icon="garage-icon"
@@ -152,7 +153,7 @@ export default{
     },  
     methods: {
         redirect(){
-            this.$router.push({ path: '/fundation' });
+            this.$router.push({ path: '/foundation' });
         }
     },
     created(){

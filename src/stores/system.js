@@ -3,21 +3,27 @@ import { defineStore } from "pinia";
 export const useSystemStore = defineStore('system', {
     state: () => ({
         theme: 'white',
-        taskbar: false
+        language: {label: "english", value: "en"},
+        languages: [
+            { label: "portuguese", value: "pt" },
+            { label: "english", value: "en" },
+        ],
+        themes: [
+            "default"
+        ]
     }),
     getters: {
         getTheme: (state) => state.theme,
-        getTaskbar: (state) => state.taskbar
+        getCurrentLanguage: (state) => state.language,
+        getLanguages: (state) => state.languages,
+        getThemes: (state) => state.themes,
     },
     actions: {
-        toggleTheme(){
-            this.theme = this.theme === 'white' ? 'dark' : 'white';
+        toggleLanguage(language){
+            this.language = language;
         },
-        toggleTaskbar(){
-            this.taskbar = !this.taskbar;
+        toggleTheme(theme){
+            this.theme = theme;
         },
-        setTaskbar(value){
-            this.taskbar = value;
-        }
     }
 })

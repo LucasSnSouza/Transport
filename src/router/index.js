@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue';
-import FundationView from '../views/FundationView.vue'
+import FoundationView from '../views/FoundationView.vue'
 import CompaniesView from '../views/CompaniesView.vue'
 import CompanyView from '../views/CompanyView.vue'
 import OperationsView from '../views/OperationsView.vue'
+import GarageView from '../views/GarageView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,10 +17,10 @@ const router = createRouter({
       meta: { title: 'Home', goback: false }
     },
     {
-      path: '/fundation',
-      name: 'Fundation',
-      component: FundationView,
-      meta: { title: 'Fundation', goback: true }
+      path: '/foundation',
+      name: 'Foundation',
+      component: FoundationView,
+      meta: { title: 'Foundation', goback: true }
     },
     {
       path: '/companies',
@@ -38,6 +39,12 @@ const router = createRouter({
       name: 'Operations',
       component: OperationsView,
       meta: { title: 'Operations', goback: true}
+    },
+    {
+      path: '/garage',
+      name: 'Garage',
+      component: GarageView,
+      meta: { title: 'Garage', goback: true}
     },
   ]
 })
