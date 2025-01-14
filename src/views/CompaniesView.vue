@@ -8,11 +8,11 @@
             </div>
             <div class="w-full">
                 <h1 class="font-sm">balances</h1>
-                <p class="font-sm color-brand-three">$ {{ balances() }}</p>
+                <p class="font-sm color-brand-three">$ {{ $money(balances()) }}</p>
             </div>
             <div class="w-full">
                 <h1 class="font-sm">bank</h1>
-                <p class="font-sm color-brand-three">$ {{ business.balance }}</p>
+                <p class="font-sm color-brand-three">$ {{ $money(business.balance) }}</p>
             </div>
         </div>
         <div class="companies-buttons-frame w-full h-full flex flex-column gap-lg">

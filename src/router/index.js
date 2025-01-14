@@ -6,6 +6,7 @@ import CompaniesView from '../views/CompaniesView.vue'
 import CompanyView from '../views/CompanyView.vue'
 import OperationsView from '../views/OperationsView.vue'
 import GarageView from '../views/GarageView.vue'
+import ConfigurationView from '../views/ConfigurationView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +15,13 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: HomeView,
-      meta: { title: 'Home', goback: false }
+      meta: { title: 'Welcome', goback: false }
+    },
+    {
+      path: '/configuration',
+      name: 'Configuration',
+      component: ConfigurationView,
+      meta: { title: 'Settings', goback: true}
     },
     {
       path: '/foundation',

@@ -13,7 +13,7 @@
 
             <div class="w-full">
                 <h1 class="font-sm">{{ $translate('foundation.infobar.bank') }}</h1>
-                <p class="font-sm color-brand-three">$ {{ business.balance - form['balance'] }}</p>
+                <p class="font-sm color-brand-three">$ {{ $money(business.balance - form['balance']) }}</p>
             </div>
 
         </div>

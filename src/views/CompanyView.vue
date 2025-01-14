@@ -5,11 +5,11 @@
         <div class="superior flex gap-xlg justify-between">
             <div class="w-full">
                 <h1 class="font-sm">bank</h1>
-                <p class="font-sm color-brand-three">$ {{ business.balance }}</p>
+                <p class="font-sm color-brand-three">$ {{ $money(business.balance) }}</p>
             </div>
             <div class="w-full">
                 <h1 class="font-sm">balance</h1>
-                <p class="font-sm color-brand-three">$ {{ company.balance }}</p>
+                <p class="font-sm color-brand-three">$ {{ $money(company.balance) }}</p>
             </div>
             <div class="w-full">
                 <h1 class="font-sm">employees</h1>

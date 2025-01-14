@@ -1,15 +1,24 @@
 <template>
 
-    <div class="home-view-wrapper w-full h-full p-xlg bg-color-brand-one">
+    <div class="home-view-wrapper w-full h-full p-xlg bg-color-brand-one flex flex-column gap-lg">
 
-        <div class="flex gap-md">
-            <h1 class="font-sm">hello, </h1>
-            <p class="font-sm">{{ business.owner.split(' ')[0] }}</p>
+        <div class="flex flex-column gap-md">
+            <div>
+                <h1 class="font-sm color-brand-three">{{ business.owner }}</h1>
+            </div>
+            <div class="flex gap-md y-start">
+                <p class="font-xsm o-half" style="margin-top: 3px;">$</p>
+                <p class="font-sm color-brand-five">
+                    <strong class="font-lg color-brand-two">{{ $money(business.balance).split(',')[0] }}</strong>
+                    , {{ $money(business.balance).split(',')[1] }}
+                </p>
+            </div>
+            <div>
+                <p class="font-sm o-half">What are we going to do today?</p>
+            </div>
         </div>
 
-        <div>
-            <p class="font-sm o-half">What are we going to do today?</p>
-        </div>
+        <MiscDivision/>
 
         <div class="principed-navigation flex gap-md">
             <ButtonBasic
@@ -52,7 +61,7 @@
             </ButtonBasic>
             <ButtonBasic
                 class="flex p-lg rounded-md bg-color-brand-three w-full"
-                @click="$router.push({ path: '/companies' })"
+                @click="$router.push({ path: '/configuration' })"
             >
                 <div class="buttons-navigation flex flex-column h-full justify-between y-start color-brand-one">
 
@@ -78,6 +87,8 @@
 
 import { useSystemStore } from '@/stores/system.js'
 import { useManagerStore } from '@/stores/manager.js'
+
+import Utils from '@/utils/';
 
 import * as Button from "@/components/Button"
 import * as Input from "@/components/Input"
